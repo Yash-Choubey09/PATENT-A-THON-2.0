@@ -20,8 +20,8 @@ const FAQ = () => {
       answer: "All undergraduate and graduate students from any discipline are welcome to join."
     },
     {
-      question: "What is the team size limit?",
-      answer: "Teams can have 1-3 members. Solo participation is also allowed."
+    "question": "What is the team size limit?",
+    "answer": "Teams can have up to 5 members, and even more than 5 are allowed."
     },
     {
       question: "Do I need prior patent experience?",
