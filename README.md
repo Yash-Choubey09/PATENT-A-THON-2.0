@@ -1,4 +1,4 @@
-# Patent-A-Thon 1.0
+# Patent-A-Thon 2.0
 
 A professional, dark-themed Next.js web app for Chandigarh University's premier patent-focused innovation event.
 

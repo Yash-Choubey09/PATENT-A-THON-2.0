@@ -1,114 +1,163 @@
-// EXPERT MENTORS COMPONENT
-// Section for displaying mentor profiles with LinkedIn links
-// To add/edit mentors, update the 'mentors' array below
-
 'use client';
 
-import Image from 'next/image';
+import { Linkedin } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
-const LinkedInIcon = () => (
-  // LinkedIn SVG icon for mentor profiles
-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24" className="inline-block align-middle text-blue-500 mr-1">
-    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 11.268h-3v-5.604c0-1.337-.026-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.967v5.7h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.838-1.563 3.036 0 3.6 2.001 3.6 4.601v5.595z"/>
-  </svg>
-);
+const coordinators = [
+  {
+    name: 'V Ishitha',
+    role: 'Chair, CS & Secretary, SCIFI',
+    image: '/Ishita.jpeg',
+    linkedin: 'https://www.linkedin.com/in/v-ishitha-62918228a/',
+  },
+  {
+    name: 'Yash',
+    role: 'Chair, SSIT & Joint Secretary, SCIFI',
+    image: '/yash.png',
+    linkedin: '#',
+  },
+  {
+    name: 'Pieyush',
+    role: 'Vice Chair, CS',
+    image: '/pieyush.jpg',
+    linkedin: '#',
+  },
+  {
+    name: 'Shreya',
+    role: 'Vice Chair, SSIT & Student Coordinator',
+    image: '/shreya.jpeg',
+    linkedin: '#',
+  },
+];
 
-const StudentCoordinators = () => {
-  const { isDarkMode } = useTheme(); // Use global theme context
-  
-  const mentors = [
-    {
-      name: "Ashish Kumar",
-      position: "Secretary",
-      organization: "Sci-Fi Innovation Club",
-      image: "/Ashish.jpeg",
-      linkedin: "https://www.linkedin.com/in/dear-ashish"
-    },
-    {
-      name: "Sarthak Kumar Thakur",
-      position: "Secretary",
-      organization: "Engineering Community",
-      image: "/Sarthak.jpeg",
-      linkedin: "https://www.linkedin.com/in/sarthak-kumar-thakur-097498231/"
-    },
-    {
-      name: "Mehak Kaur",
-      position: "Secretary",
-      organization: "Campus-to-Corporate Club",
-      image: "/Mehek.jpeg",
-      linkedin: "https://www.linkedin.com/in/mehak-kaur-2061b1288/"
-    },
-    {
-      name: "Krish Gauttam",
-      position: "Joint Secretary",
-      organization: "Sci-Fi Innovation Club",
-      image: "/Krish.jpeg",
-      linkedin: "https://www.linkedin.com/in/krish2136/"
-    },
-    {
-      name: "Harshita Pandey",
-      position: "Joint Secretary",
-      organization: "Sci-Fi Innovation Club",
-      image: "/Harshita.jpeg",
-      linkedin: "https://www.linkedin.com/in/harshita-pandey-b6853a290/"
-    },
-    {
-      name: "V Ishitha",
-      position: "Joint Secretary",
-      organization: "Sci-Fi Innovation Club",
-      image: "/Ishita.jpeg",
-      linkedin: "https://www.linkedin.com/in/v-ishitha-62918228a/"
-    }
-  ];
+export default function StudentCoordinators() {
+  const { isDarkMode } = useTheme();
 
   return (
-    <section id="mentors" className={`py-20 transition-colors duration-500 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
-      <div className="max-w-full mx-auto px-8">
-        {/* Section title and intro */}
-        <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Student Coordinators</h2>
-          {/* <p className={`text-xl max-w-3xl mx-auto ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Connecting Students with Opportunities
-          </p> */}
+    <section
+      id="student-coordinators"
+      className={`py-20 md:py-24 transition-colors duration-300 ${
+        isDarkMode ? 'bg-[#00172B]' : 'bg-slate-50'
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-6">
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <p
+            className={`text-xs md:text-sm font-black uppercase tracking-[0.2em] mb-4 ${
+              isDarkMode ? 'text-[#00A3FF]' : 'text-[#0066FF]'
+            }`}
+          >
+            Student Leadership
+          </p>
+
+          <h2
+            className={`text-4xl md:text-5xl font-black tracking-tight ${
+              isDarkMode ? 'text-white' : 'text-[#002B49]'
+            }`}
+          >
+            Student Coordinators
+          </h2>
+
+          <p
+            className={`mt-4 text-sm md:text-base leading-relaxed ${
+              isDarkMode ? 'text-slate-400' : 'text-slate-600'
+            }`}
+          >
+            Meet the student leaders helping bring Patent-A-Thon 2.0
+            to life.
+          </p>
         </div>
-        
-        {/* Mentors grid: each card shows image, name, position, organization, and LinkedIn link */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {mentors.map((mentor, index) => (
+
+        {/* Coordinators Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {coordinators.map((person) => (
             <div
-              key={index}
-              className={`backdrop-blur-sm rounded-xl p-6 border-2 transition-all duration-500 text-center group relative overflow-hidden hover:shadow-lg hover:transform hover:scale-105 ${isDarkMode ? 'bg-gray-800/80 border-gray-700 hover:border-green-400 hover:bg-gray-800/90 hover:shadow-green-400/20' : 'bg-white/90 border-blue-200 hover:border-blue-400 hover:bg-white hover:shadow-blue-400/20'}`}
+              key={person.name}
+              className={`group rounded-2xl border overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
+                isDarkMode
+                  ? 'bg-[#08233B] border-slate-700 hover:border-[#00A3FF]/60 hover:shadow-xl hover:shadow-[#0066FF]/10'
+                  : 'bg-white border-slate-200 hover:border-[#0066FF]/40 hover:shadow-xl hover:shadow-slate-200'
+              }`}
             >
-              {/* Animated border effect */}
-              <div className={`absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 animate-pulse ${isDarkMode ? 'bg-gradient-to-r from-green-400/10 via-blue-500/10 to-purple-600/10' : 'bg-gradient-to-r from-blue-400/10 via-purple-500/10 to-indigo-600/10'}`}></div>
-              
-              <div className="relative z-10">
-                <div className={`relative w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-4 transition-all duration-300 ${isDarkMode ? 'border-gray-600 group-hover:border-green-400' : 'border-blue-300 group-hover:border-blue-500'}`}>
-                  <Image
-                    src={mentor.image}
-                    alt={`${mentor.name} portrait`}
-                    fill
-                    className="object-cover"
+
+              {/* Profile Image / Placeholder */}
+              <div
+                className={`relative h-64 flex items-center justify-center overflow-hidden ${
+                  isDarkMode
+                    ? 'bg-[#061E32]'
+                    : 'bg-slate-100'
+                }`}
+              >
+                {person.image ? (
+                  <img
+                    src={person.image}
+                    alt={person.name}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   />
-                </div>
-                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 ${isDarkMode ? 'text-white group-hover:text-green-400' : 'text-gray-900 group-hover:text-blue-600'}`}>
-                  {mentor.name}
-                </h3>
-                <p className={`font-medium mb-2 text-sm transition-colors duration-300 ${isDarkMode ? 'text-green-400' : 'text-blue-500 group-hover:text-blue-600'}`}>
-                  {mentor.position}
-                </p>
-                <p className={`text-xs mb-2 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  {mentor.organization}
-                </p>
-                <a
-                  href={mentor.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center justify-center gap-1 font-medium text-sm mt-2 transition-colors duration-300 ${isDarkMode ? 'text-blue-400 hover:text-green-400' : 'text-blue-600 hover:text-blue-800'}`}
+                ) : (
+                  <div
+                    className={`w-24 h-24 rounded-full flex items-center justify-center text-3xl font-black border-2 ${
+                      isDarkMode
+                        ? 'bg-[#082A45] border-[#00A3FF]/40 text-[#00A3FF]'
+                        : 'bg-white border-[#0066FF]/30 text-[#0066FF]'
+                    }`}
+                  >
+                    {person.name.charAt(0)}
+                  </div>
+                )}
+
+                {/* Bottom Gradient */}
+                <div
+                  className={`absolute inset-x-0 bottom-0 h-24 pointer-events-none ${
+                    isDarkMode
+                      ? 'bg-gradient-to-t from-[#08233B] to-transparent'
+                      : 'bg-gradient-to-t from-white/80 to-transparent'
+                  }`}
+                />
+              </div>
+
+              {/* Content */}
+              <div className="p-5 text-center">
+
+                <h3
+                  className={`text-lg font-extrabold transition-colors duration-300 ${
+                    isDarkMode
+                      ? 'text-white group-hover:text-[#00A3FF]'
+                      : 'text-[#002B49] group-hover:text-[#0066FF]'
+                  }`}
                 >
-                  <LinkedInIcon />
-                  LinkedIn
-                </a>
+                  {person.name}
+                </h3>
+
+                <p
+                  className={`mt-2 text-sm font-semibold leading-relaxed min-h-[42px] ${
+                    isDarkMode
+                      ? 'text-slate-400'
+                      : 'text-slate-600'
+                  }`}
+                >
+                  {person.role}
+                </p>
+
+                {/* LinkedIn */}
+                {person.linkedin !== '#' && (
+                  <a
+                    href={person.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${person.name} LinkedIn profile`}
+                    className={`inline-flex items-center justify-center w-9 h-9 mt-4 rounded-lg transition-all duration-300 ${
+                      isDarkMode
+                        ? 'bg-[#0066FF]/15 text-[#00A3FF] hover:bg-[#00A3FF] hover:text-[#00172B]'
+                        : 'bg-[#0066FF]/10 text-[#0066FF] hover:bg-[#0066FF] hover:text-white'
+                    }`}
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                )}
+
               </div>
             </div>
           ))}
@@ -116,11 +165,4 @@ const StudentCoordinators = () => {
       </div>
     </section>
   );
-};
-
-export default StudentCoordinators;
-// End EXPERT MENTORS COMPONENT
-
-// This section shows all the expert mentors.
-// To add a mentor, just add to the 'mentors' array below.
-// You can change their name, position, organization, image, or LinkedIn link.
+}

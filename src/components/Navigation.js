@@ -1,12 +1,3 @@
-// This is the navigation bar at the top.
-// To change the logo text or tagline, edit the lines near the top.
-// To add or remove navigation links, look for the links section.
-// To update the buttons (Register, WhatsApp), find the button code below.
-
-// NAVIGATION COMPONENT
-// Top navigation bar with logo, tagline, and links
-// To change logo text or navigation links, edit lines below
-
 'use client';
 
 import { useState } from 'react';
@@ -16,170 +7,124 @@ import { useTheme } from '../contexts/ThemeContext';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isDarkMode, toggleTheme } = useTheme(); // Use global theme context
+  const { isDarkMode, toggleTheme } = useTheme();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b ${isDarkMode ? 'bg-black/90 border-gray-800' : 'bg-white/90 border-gray-200'}`}>
-      <div className="max-w-full mx-auto px-8">
+    <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-colors duration-300 ${
+      isDarkMode ? 'bg-[#00172B]/90 border-slate-800' : 'bg-white/95 border-slate-200 shadow-sm'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          {/* Logo, title and tagline section */}
-          <div className="flex items-center gap-4">
-            {/* Logo */}
-            <div className="w-16 h-16 mt-0 rounded-full items-center justify-center text-white font-bold text-xl">
+          
+          {/* Logo & Branding */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="relative w-11 h-11 flex items-center justify-center transition-transform group-hover:scale-105">
               <Image
                 src={isDarkMode ? "/LOGO.png" : "/LOGO-black.png"}
                 alt="Patent-A-Thon Logo"
-                width={64}
-                height={64}
-                className="rounded-full"
+                width={44}
+                height={44}
+                className="rounded-full object-contain"
                 priority
               />
             </div>
-            {/* Title and tagline */}
             <div className="flex flex-col">
-              <h1 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                Patent-A-Thon 1.0
-              </h1>
-              <span className={`text-sm text-green-400 font-semibold ${isDarkMode ? 'text-green' : 'text-purple-700'}`}>
-                Ideate • Innovate • Invent
+              <span className={`font-black text-lg tracking-tight leading-tight ${isDarkMode ? 'text-white' : 'text-[#002B49]'}`}>
+                PATENT-A-THON <span className={isDarkMode ? 'text-[#00A3FF]' : 'text-[#0066FF]'}>2.0</span>
+              </span>
+              <span className={`text-[10px] font-bold tracking-widest uppercase ${isDarkMode ? 'text-[#00A3FF]' : 'text-[#0066FF]'}`}>
+                IDEATE • INNOVATE • INVENT
               </span>
             </div>
+          </a>
+
+          {/* Desktop Navigation Links */}
+          <div className={`hidden lg:flex items-center space-x-8 font-bold text-sm ${isDarkMode ? 'text-slate-200' : 'text-slate-700'}`}>
+            {['About', 'Tracks', 'Timeline', 'Partners', 'FAQ'].map((item) => (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase()}`} 
+                className={`transition-colors ${isDarkMode ? 'hover:text-[#00A3FF]' : 'hover:text-[#0066FF]'}`}
+              >
+                {item}
+              </a>
+            ))}
           </div>
 
-        {/* Desktop navigation links */}
-          {/* <div className="hidden md:flex items-center space-x-8">
-            <a href="#tracks" className={`hover:text-green-400 transition-colors ${isDarkMode ? 'text-gray-300' : 'text-black'}`}>
-              Tracks
-            </a>
-            <a href="#timeline" className={`hover:text-green-400 transition-colors ${isDarkMode ? 'text-gray-300' : 'text-black'}`}>
-              Timeline
-            </a>
-            <a href="#mentors" className={`hover:text-green-400 transition-colors ${isDarkMode ? 'text-gray-300' : 'text-black'}`}>
-              Mentors
-            </a>
-            {/* <a href="/community-partners" className={`hover:text-green-400 transition-colors ${isDarkMode ? 'text-gray-300' : 'text-black'}`}>
-              Partners
-            </a> */}
-            {/* <a href="#faq" className={`hover:text-green-400 transition-colors ${isDarkMode ? 'text-gray-300' : 'text-black'}`}>
-              FAQ
-            </a>
-          </div> */}
-
-          {/* Desktop CTA buttons and Theme Toggle */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Action Buttons */}
+          <div className="hidden md:flex items-center space-x-3">
             <a
-              href="https://docs.google.com/forms/d/1fIqW1_lN9XV0re2l6G4Bc79yFwbj9kM5YzNckMkMbzc/edit"
+              href="https://forms.gle/Pvzz2wkyFasMteDT7"
               target="_blank"
               rel="noopener noreferrer"
-              className={`px-6 py-2 rounded-full font-medium transition-colors ${
-                isDarkMode
-                  ? 'bg-green-600 hover:bg-green-700 text-white'
-                  : 'bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white shadow-lg'
-              }`}
+              className="bg-[#0066FF] hover:bg-[#0052CC] text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md hover:shadow-lg transition-all"
             >
               Register Now
             </a>
             <a
-              href="https://chat.whatsapp.com/CXnEqBAZlSIC3Msbv8017a?mode=ems_qr_c"
+              href="https://chat.whatsapp.com/CXnEqBAZlSIC3Msbv8017a"
               target="_blank"
               rel="noopener noreferrer"
-              className={`border px-6 py-2 rounded-full font-medium transition-colors ${isDarkMode ? 'border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white' : 'border-gray-800 hover:border-gray-800 text-gray-800 hover:text-gray-900'}`}
+              className={`border-2 px-5 py-2.5 rounded-full font-bold text-sm transition-all ${
+                isDarkMode 
+                  ? 'border-slate-300 text-slate-100 hover:bg-white hover:text-[#002B49]' 
+                  : 'border-[#002B49] text-[#002B49] hover:bg-[#002B49] hover:text-white'
+              }`}
             >
               Join WhatsApp
             </a>
-            
-            {/* Theme Toggle Button */}
+
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full transition-all duration-200 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
+              className={`p-2.5 rounded-full border transition-all ${
+                isDarkMode 
+                  ? 'bg-slate-800 text-amber-400 border-slate-700 hover:bg-slate-700' 
+                  : 'bg-slate-100 text-slate-800 border-slate-300 hover:bg-slate-200'
+              }`}
               aria-label="Toggle theme"
             >
-              {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
           </div>
 
-          {/* Mobile menu button and theme toggle */}
+          {/* Mobile Menu Actions */}
           <div className="md:hidden flex items-center space-x-2">
-            {/* Mobile Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full transition-all duration-200 ${isDarkMode ? 'bg-gray-800 hover:bg-gray-700 text-yellow-400' : 'bg-gray-200 hover:bg-gray-300 text-gray-700'}`}
-              aria-label="Toggle theme"
+            <button 
+              onClick={toggleTheme} 
+              className={`p-2 rounded-full ${isDarkMode ? 'bg-slate-800 text-amber-400' : 'bg-slate-100 text-slate-800'}`}
             >
               {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
-            
-            {/* Mobile Menu Button */}
-            <button
-              onClick={toggleMenu}
-              className={`focus:outline-none ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-            >
+            <button onClick={toggleMenu} className={`p-2 ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className={`md:hidden border-t ${isDarkMode ? 'bg-black/95 border-gray-800' : 'bg-white/95 border-gray-200'}`}>
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <a
-                href="#tracks"
-                className={`block px-3 py-2 transition-colors ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                onClick={toggleMenu}
+          <div className={`md:hidden py-4 border-t space-y-3 ${isDarkMode ? 'border-slate-800' : 'border-slate-200'}`}>
+            {['About', 'Tracks', 'Timeline', 'Partners'].map((item) => (
+              <a 
+                key={item} 
+                href={`#${item.toLowerCase()}`} 
+                onClick={toggleMenu} 
+                className={`block px-4 py-2 rounded-lg text-sm font-semibold ${
+                  isDarkMode ? 'hover:bg-slate-800 text-slate-200' : 'hover:bg-slate-100 text-slate-700'
+                }`}
               >
-                Tracks
+                {item}
               </a>
-              <a
-                href="#timeline"
-                className={`block px-3 py-2 transition-colors ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                onClick={toggleMenu}
-              >
-                Timeline
+            ))}
+            <div className="pt-2 flex flex-col gap-2">
+              <a href="https://forms.gle/Pvzz2wkyFasMteDT7" target="_blank" rel="noopener noreferrer" className="bg-[#0066FF] text-white py-2.5 text-center rounded-full font-bold text-sm">
+                Register Now
               </a>
-              <a
-                href="#mentors"
-                className={`block px-3 py-2 transition-colors ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                onClick={toggleMenu}
-              >
-                Mentors
+              <a href="https://chat.whatsapp.com/CXnEqBAZlSIC3Msbv8017a" target="_blank" rel="noopener noreferrer" className={`border text-center py-2.5 rounded-full font-bold text-sm ${isDarkMode ? 'border-white text-white' : 'border-[#002B49] text-[#002B49]'}`}>
+                Join WhatsApp
               </a>
-              <a
-                href="/community-partners"
-                className={`block px-3 py-2 transition-colors ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                onClick={toggleMenu}
-              >
-                Partners
-              </a>
-              <a
-                href="#faq"
-                className={`block px-3 py-2 transition-colors ${isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                onClick={toggleMenu}
-              >
-                FAQ
-              </a>
-              <div className="pt-4 space-y-2">
-                <a
-                  href="https://docs.google.com/forms/d/1fIqW1_lN9XV0re2l6G4Bc79yFwbj9kM5YzNckMkMbzc/edit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-3 py-2 rounded-full font-medium transition-all duration-300 text-center shadow-lg"
-                >
-                  Register Now
-                </a>
-                <a
-                  href="https://chat.whatsapp.com/CXnEqBAZlSIC3Msbv8017a?mode=ems_qr_c"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`block border px-3 py-2 rounded-full font-medium transition-colors text-center ${isDarkMode ? 'border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white' : 'border-gray-300 hover:border-gray-400 text-gray-600 hover:text-gray-900'}`}
-                >
-                  Join WhatsApp
-                </a>
-              </div>
             </div>
           </div>
         )}
@@ -189,5 +134,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-
-// End NAVIGATION COMPONENT

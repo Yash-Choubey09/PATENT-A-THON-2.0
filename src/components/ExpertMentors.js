@@ -27,7 +27,7 @@ const ExpertMentors = () => {
     },
     {
       name: "Dr. Ruchika Gupta",
-      position: "AD-UIE Research and Outreach",
+      position: "Directer-UIE Research and Outreach",
       organization: "Chandigarh University",
       image: "/Ruchika M.jpeg",
       linkedin: "https://www.linkedin.com/in/ruchikagupta09/"
@@ -40,11 +40,11 @@ const ExpertMentors = () => {
       linkedin: "https://www.linkedin.com/in/dr-puneet-kumar-2a84b531/"
     },
     {
-      name: "Dr. Gurmeet Saini",
-      position: "Associate Professor",
+      name: "Dr. Navneet Kaur",
+      position: "AD-UIE Research and Outreach",
       organization: "Chandigarh University",
-      image: "/Gurmeet.jpeg",
-      linkedin: "https://www.linkedin.com/in/gurmeet-kaur-saini-4b6815213/"
+      image: "/navneet_mam.png",
+      linkedin: "#"
     },
     {
       name: "Er. Bhavneet Kaur",

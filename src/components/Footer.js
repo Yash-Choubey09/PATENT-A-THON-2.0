@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Mail, Github, Linkedin, Twitter, Phone, Instagram, Youtube, MessageCircle } from 'lucide-react';
@@ -29,7 +30,7 @@ const Footer = () => {
                 />
               </div>
               <span className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                Patent-A-Thon 1.0
+                Patent-A-Thon 2.0
               </span>
             </div>
             <p className={`ml-10 font-bold ${isDarkMode ? 'text-green-400' : 'text-purple-600'} max-w-md font-semibold`}>
@@ -56,7 +57,7 @@ const Footer = () => {
               </a>
               
               <a 
-                href="tel:+919234408229" 
+                href="tel:+918447904432" 
                 className={`flex items-start space-x-2 transition-colors ${
                   isDarkMode 
                     ? 'text-gray-300 hover:text-white' 
@@ -65,13 +66,13 @@ const Footer = () => {
               >
                 <Phone size={16} className={`mt-0.5 flex-shrink-0 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 <div className="text-sm">
-                  <div className="whitespace-nowrap">+91 92344 08229</div>
-                  <div className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Harshita (Joint Secretary)</div>
+                  <div className="whitespace-nowrap">+91 84479 04432</div>
+                  <div className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Yash Chaubey (Joint Secretary)</div>
                 </div>
               </a>
               
               <a 
-                href="tel:+917015567105" 
+                href="tel:+917699326022" 
                 className={`flex items-start space-x-2 transition-colors ${
                   isDarkMode 
                     ? 'text-gray-300 hover:text-white' 
@@ -80,8 +81,8 @@ const Footer = () => {
               >
                 <Phone size={16} className={`mt-0.5 flex-shrink-0 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 <div className="text-sm">
-                  <div className="whitespace-nowrap">+91 70155 67105</div>
-                  <div className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Krish (Joint Secretary)</div>
+                  <div className="whitespace-nowrap">+91 76993 26022</div>
+                  <div className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Aritra (Joint Secretary)</div>
                 </div>
               </a>
             </div>
@@ -118,7 +119,7 @@ const Footer = () => {
                 <Youtube className="w-5 h-5" />
               </a>
               <a
-                href="https://chat.whatsapp.com/CXnEqBAZlSIC3Msbv8017a?mode=ems_qr_c"
+                href="https://chat.whatsapp.com/EsqChHUok02G5MT1UknOND?s=sw&p=a&mlu=4&ilr=4"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`w-10 h-10 rounded-full flex items-center justify-center hover:bg-green-500/20 hover:text-green-400 transition-all duration-300 group ${isDarkMode ? 'bg-gray-800' : 'bg-gray-600'}`}
@@ -135,7 +136,7 @@ const Footer = () => {
         }`}>
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-              © 2025 Patent-A-Thon | Sci-Fi Innovation Club
+              © 2026 Patent-A-Thon | Sci-Fi Innovation Club
             </p>
             {/* <div className="flex space-x-6">
               <a 

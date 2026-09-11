@@ -1,19 +1,11 @@
-// HEADER COMPONENT
-// Main landing section with event title, tagline, date, venue, and registration buttons
-// To change event name, tagline, or date, edit lines below
-// To change the registration button, look for the 'Register Now' link.
-// To update the stats (participants, ideas, tracks, innovation), edit the grid at the bottom.
-
 'use client';
 
-import { Calendar, Clock, MapPin } from 'lucide-react';
+import { Calendar, Clock, MapPin, Award, Sparkles } from 'lucide-react';
 import { useEffect, useState } from "react";
 import { useTheme } from '../contexts/ThemeContext';
 
 const Header = () => {
-  const { isDarkMode } = useTheme(); // Use global theme context
-  
-  // Animated counter hook
+  const { isDarkMode } = useTheme();
 
   function useCountUp(to, duration = 2000) {
     const [count, setCount] = useState(0);
@@ -32,40 +24,29 @@ const Header = () => {
     return count;
   }
 
-  // Only start counting when header is visible
   const [startCount, setStartCount] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-  // Countdown timer state
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
-
-  // Calculate countdown to September 20th, 2025 at 6 PM
   useEffect(() => {
-    const targetDate = new Date('2025-09-30T23:59:59').getTime();
-    
+    const targetDate = new Date('2026-10-07T23:59:59').getTime();
     const updateCountdown = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
 
       if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        setTimeLeft({ days, hours, minutes, seconds });
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
       } else {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
     const timer = setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call
-
+    updateCountdown();
     return () => clearInterval(timer);
   }, []);
 
@@ -80,139 +61,154 @@ const Header = () => {
       }
     };
     window.addEventListener('scroll', handleScroll);
-    // Check on mount in case already visible
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const participants = useCountUp(startCount ? 200 : 0, 15000);
+  const participants = useCountUp(startCount ? 500 : 0, 2000);
 
   return (
-    <header id="main-header" className={`min-h-screen relative overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-black text-white' : 'bg-gray-50 text-gray-900'}`}>
-      {/* Background Pattern */}
-      <div className={`absolute inset-0 transition-all duration-500 ${isDarkMode ? 'bg-gradient-to-br from-black via-gray-900 to-black' : 'bg-gradient-to-br from-gray-100 via-white to-gray-100'}`}>
-        <div className={`absolute inset-0 ${isDarkMode ? 'bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.1),transparent_50%)]' : 'bg-[radial-gradient(circle_at_50%_50%,rgba(34,197,94,0.05),transparent_50%)]'}`}></div>
-      </div>
-      {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-green-500/20 rounded-full blur-xl"></div>
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-500/20 rounded-full blur-xl"></div>
-        <div className="relative max-w-full mx-auto px-8 pt-20 pb-16 min-h-screen flex flex-col justify-center">
-          
-          <div className="text-center">
-            {/* Main event title */}
-            <div className="mt-6">
-          <h1 className={`text-3xl md:text-4xl lg:text-4xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            Sci-Fi Innovation Club
-          </h1>
-          <h2 className={`text-xl md:text-xl lg:text-xl font-semibold ${isDarkMode ? 'text-white-1000' : 'text-gray-900'}`}>Presents</h2>
-            </div>
-            <div className="mb-2">
-          <h1 className={`text-4xl md:text-6xl lg:text-6xl font-bold tracking-tight bg-clip-text text-transparent ${isDarkMode ? 'bg-gradient-to-r from-green-400 via-blue-500 to-purple-600' : 'bg-gradient-to-r from-green-600 via-blue-600 to-purple-700'}`}>
-            Patent-A-Thon 1.0
-          </h1>
-            </div>
-            <p className={`text-lg md:text-xl lg:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
-          Join Patent-a-thon 1.0 at Chandigarh University and turn your innovative ideas into protected intellectual property. Register now and be part of this groundbreaking innovation event
-            </p>
-            {/* Event details (date, time, venue) */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-8 mb-6">
-            <div className={`flex items-center gap-3 text-base lg:text-lg ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-              <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
-                <Calendar className="w-4 h-4 text-blue-400" />
-              </div>
-              <span className="font-semibold">Date Announced Soon</span>
-            </div>
-            <div className={`flex items-center gap-3 text-base lg:text-lg ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-              <div className="w-8 h-8 bg-blue-500/20 rounded-full flex items-center justify-center">
-                <Clock className="w-4 h-4 text-blue-400" />
-              </div>
-              <span className="font-semibold">Full Day Event</span>
-            </div>
-            <div className={`flex items-center gap-3 text-base lg:text-lg ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-              <div className="w-8 h-8 bg-purple-500/20 rounded-full flex items-center justify-center">
-                <MapPin className="w-4 h-4 text-purple-400" />
-              </div>
-              <a href="https://maps.app.goo.gl/AiwNVUqkVgkSVL6B7" className="font-semibold hover:text-green-400 transition-colors" target="_blank" rel="noopener noreferrer">Chandigarh University</a>
-            </div>
-          </div>
-          
-          {/* Countdown Timer */}
-          <div className="mb-8">
-            <h3 className={`text-lg md:text-xl font-semibold mb-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              Registration Ends In
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4">
-              <div className={`backdrop-blur-sm rounded-lg p-4 border transition-all duration-300 ${isDarkMode ? 'bg-white/10 border-green-500/30' : 'bg-white/90 border-green-500/40'} min-w-[80px]`}>
-                <div className="text-2xl md:text-3xl font-bold text-green-400">{timeLeft.days}</div>
-                <div className={`text-xs md:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Days</div>
-              </div>
-              <div className={`backdrop-blur-sm rounded-lg p-4 border transition-all duration-300 ${isDarkMode ? 'bg-white/10 border-blue-500/30' : 'bg-white/90 border-blue-500/40'} min-w-[80px]`}>
-                <div className="text-2xl md:text-3xl font-bold text-blue-400">{timeLeft.hours}</div>
-                <div className={`text-xs md:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Hours</div>
-              </div>
-              <div className={`backdrop-blur-sm rounded-lg p-4 border transition-all duration-300 ${isDarkMode ? 'bg-white/10 border-purple-500/30' : 'bg-white/90 border-purple-500/40'} min-w-[80px]`}>
-                <div className="text-2xl md:text-3xl font-bold text-purple-400">{timeLeft.minutes}</div>
-                <div className={`text-xs md:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Minutes</div>
-              </div>
-              <div className={`backdrop-blur-sm rounded-lg p-4 border transition-all duration-300 ${isDarkMode ? 'bg-white/10 border-yellow-500/30' : 'bg-white/90 border-yellow-500/40'} min-w-[80px] animate-pulse`}>
-                <div className="text-2xl md:text-3xl font-bold text-yellow-400">{timeLeft.seconds}</div>
-                <div className={`text-xs md:text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Seconds</div>
-              </div>
-            </div>
-          </div>
+    <header id="main-header" className={`min-h-screen pt-28 pb-16 relative overflow-hidden transition-colors duration-300 ${
+      isDarkMode ? 'bg-[#00172B] text-white' : 'bg-slate-50 text-slate-900'
+    }`}>
+      {/* Dynamic Background Mesh */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-gradient-to-b from-[#0066FF]/15 via-[#00A3FF]/10 to-transparent blur-3xl pointer-events-none" />
 
-          {/* Registration and WhatsApp buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <a
-              href="https://docs.google.com/forms/d/1fIqW1_lN9XV0re2l6G4Bc79yFwbj9kM5YzNckMkMbzc/edit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg
-                ${isDarkMode
-                  ? 'bg-green-600 hover:bg-green-800 text-white hover:shadow-purple-500/25'
-                  : 'bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white hover:shadow-xl hover:shadow-green-500/30'
-                }`}
-            >
-              Register Now
-            </a> 
-            <a
-              href="https://chat.whatsapp.com/CXnEqBAZlSIC3Msbv8017a?mode=ems_qr_c"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`border-2 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105
-                ${isDarkMode
-                  ? 'border-green-400 text-white hover:border-green-400 hover:text-green-300'
-                  : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:border-blue-700 shadow-lg hover:shadow-blue-500/25'
-                }`}
-            >
-              Join WhatsApp
+      <div className="relative max-w-6xl mx-auto px-6 text-center flex flex-col justify-center min-h-[calc(100vh-7rem)]">
+        
+        {/* Organizing Badge */}
+        <div className={`inline-flex items-center gap-2 self-center px-4 py-1.5 rounded-full border font-bold text-xs md:text-sm mb-6 shadow-sm ${
+          isDarkMode ? 'bg-[#0066FF]/10 border-[#0066FF]/20 text-[#00A3FF]' : 'bg-[#0066FF]/10 border-[#0066FF]/20 text-[#0066FF]'
+        }`}>
+          <Award className={`w-4 h-4 ${isDarkMode ? 'text-[#00A3FF]' : 'text-[#0066FF]'}`} />
+          <span>University Institute of Engineering × UCRD - Patent Cell</span>
+        </div>
+
+        {/* Hero Main Heading - Explicit Ternary Fix */}
+        <h1 className={`text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-3 leading-none ${
+          isDarkMode ? 'text-white' : 'text-[#002B49]'
+        }`}>
+          PATENT-A-THON <span className={isDarkMode ? 'text-[#00A3FF]' : 'text-[#0066FF]'}>2.0</span>
+        </h1>
+
+        {/* Tagline */}
+        <p className={`text-sm md:text-xl font-extrabold tracking-[0.25em] uppercase mb-6 flex items-center justify-center gap-2 ${
+          isDarkMode ? 'text-[#00A3FF]' : 'text-[#0066FF]'
+        }`}>
+          <Sparkles className="w-4 h-4 hidden sm:block" />
+          IDEATE • INNOVATE • INVENT
+          <Sparkles className="w-4 h-4 hidden sm:block" />
+        </p>
+
+        {/* Sub-headline */}
+        <p className={`text-base md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed font-medium ${
+          isDarkMode ? 'text-slate-300' : 'text-slate-600'
+        }`}>
+          Turning Ideas Into A Brighter Tomorrow. Join Chandigarh University&apos;s premier innovation marathon to transform high-impact concepts into verified intellectual property.
+        </p>
+
+        {/* Info Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 mb-12 text-xs md:text-base font-bold">
+          <div className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl shadow-md border ${
+            isDarkMode ? 'bg-slate-800/80 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-800'
+          }`}>
+            <Calendar className="w-4 h-4 md:w-5 md:h-5 text-[#0066FF]" />
+            <span>12th Sep – 3rd Nov</span>
+          </div>
+          <div className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl shadow-md border ${
+            isDarkMode ? 'bg-slate-800/80 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-800'
+          }`}>
+            <Clock className="w-4 h-4 md:w-5 md:h-5 text-[#0066FF]" />
+            <span>Hybrid Event</span>
+          </div>
+          <div className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl shadow-md border ${
+            isDarkMode ? 'bg-slate-800/80 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-800'
+          }`}>
+            <MapPin className="w-4 h-4 md:w-5 md:h-5 text-[#0066FF]" />
+            <a href="https://maps.app.goo.gl/AiwNVUqkVgkSVL6B7" target="_blank" rel="noopener noreferrer" className="hover:text-[#0066FF] transition-colors">
+              Chandigarh University
             </a>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            <div className={`backdrop-blur-sm rounded-lg p-6 border transition-colors duration-300 ${isDarkMode ? 'bg-white/5 border-gray-800' : 'bg-white/80 border-gray-200'}`}>
-              <div className="text-3xl lg:text-4xl font-bold text-green-400 mb-2">{participants}+</div>
-              <div className={`text-sm lg:text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Participants</div>
-            </div>
-            <div className={`backdrop-blur-sm rounded-lg p-6 border transition-colors duration-300 ${isDarkMode ? 'bg-white/5 border-gray-800' : 'bg-white/80 border-gray-200'}`}>
-              <div className="text-3xl lg:text-4xl font-bold text-purple-400 mb-2">9</div>
-              <div className={`text-sm lg:text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Tracks</div>
-            </div>
-            <div className={`backdrop-blur-sm rounded-lg p-6 border transition-colors duration-300 ${isDarkMode ? 'bg-white/5 border-gray-800' : 'bg-white/80 border-gray-200'}`}>
-              <div className="text-3xl lg:text-4xl font-bold text-yellow-400 mb-2">∞</div>
-              <div className={`text-sm lg:text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Innovation</div>
-            </div>
-                        <div className={`backdrop-blur-sm rounded-lg p-6 border transition-colors duration-300 ${isDarkMode ? 'bg-white/5 border-gray-800' : 'bg-white/80 border-gray-200'}`}>
-              <div className="text-3xl lg:text-4xl font-bold text-blue-400 mb-2">17+</div>
-              <div className={`text-sm lg:text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Events Organised</div>
-            </div>
+        </div>
+
+        {/* Countdown Timer */}
+        <div className="mb-12">
+          <p className={`text-xs font-black uppercase tracking-widest mb-4 ${isDarkMode ? 'text-slate-400' : 'text-slate-500'}`}>
+            Registration Closing In
+          </p>
+          <div className="flex justify-center gap-2 sm:gap-4">
+            {[
+              { label: 'Days', value: timeLeft.days },
+              { label: 'Hours', value: timeLeft.hours },
+              { label: 'Minutes', value: timeLeft.minutes },
+              { label: 'Seconds', value: timeLeft.seconds },
+            ].map((item, idx) => (
+              <div key={idx} className={`w-20 sm:w-24 py-3.5 rounded-2xl shadow-md border ${
+                isDarkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'
+              }`}>
+                <span className={`block text-2xl sm:text-4xl font-black ${
+                  isDarkMode ? 'text-[#00A3FF]' : 'text-[#002B49]'
+                }`}>
+                  {String(item.value).padStart(2, '0')}
+                </span>
+                <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-wider ${
+                  isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                }`}>
+                  {item.label}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Primary CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+          <a
+            href="https://forms.gle/Pvzz2wkyFasMteDT7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#0066FF] hover:bg-[#0052CC] text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+          >
+            Register Now
+          </a>
+          <a
+            href="https://chat.whatsapp.com/CXnEqBAZlSIC3Msbv8017a"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`border-2 px-8 py-4 rounded-full font-bold text-lg transition-all ${
+              isDarkMode 
+                ? 'border-slate-300 text-white hover:bg-white hover:text-[#002B49]' 
+                : 'border-[#002B49] text-[#002B49] hover:bg-[#002B49] hover:text-white'
+            }`}
+          >
+            Join WhatsApp
+          </a>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto w-full">
+          {[
+            { label: 'Expected Participants', val: `${participants}+` },
+            { label: 'Innovation Tracks', val: '9' },
+            { label: 'Ideation Scope', val: '∞' },
+            { label: 'Organized Events', val: '17+' },
+          ].map((stat, idx) => (
+            <div key={idx} className={`p-5 rounded-2xl backdrop-blur-sm shadow-sm border ${
+              isDarkMode ? 'bg-slate-800/60 border-slate-700' : 'bg-white border-slate-200'
+            }`}>
+              <div className={`text-3xl font-black mb-1 ${isDarkMode ? 'text-[#00A3FF]' : 'text-[#0066FF]'}`}>
+                {stat.val}
+              </div>
+              <div className={`text-xs md:text-sm font-bold ${isDarkMode ? 'text-slate-300' : 'text-slate-600'}`}>
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </header>
   );
 };
 
 export default Header;
-
-// End HEADER COMPONENT

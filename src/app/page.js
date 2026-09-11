@@ -6,14 +6,17 @@ import ExpertMentors from '../components/ExpertMentors';
 import CommunityPartners from '../components/CommunityPartners';
 import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
-import { Club } from 'lucide-react';
 import StudentCoordinators from '@/components/StudentCoordinators';
 import ClubShowcase from '@/components/ClubShowcase';
-// import ClubShowcase from '@/components/ClubShowcase';
+import LaunchAnimation from '../components/LaunchAnimation';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
+
+      {/* Patent-A-Thon Launch Animation */}
+      <LaunchAnimation />
+
       <Navigation />
       <Header />
       <InnovationTracks />
@@ -24,6 +27,7 @@ export default function Home() {
       <FAQ />
       <ClubShowcase />
       <Footer />
-    </div> 
+
+    </div>
   );
 }
