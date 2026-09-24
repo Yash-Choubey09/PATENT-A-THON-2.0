@@ -138,6 +138,9 @@ const Footer = () => {
             <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
               © 2026 Patent-A-Thon | Sci-Fi Innovation Club
             </p>
+            <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              Designed By Ayush yadav.
+            </p>
             {/* <div className="flex space-x-6">
               <a 
                 href="#" 
