@@ -191,7 +191,7 @@ const ClubShowcase = () => {
             </a>
             
             <a
-              href="https://chat.whatsapp.com/CXnEqBAZlSIC3Msbv8017a?mode=ems_qr_c"
+              href="https://chat.whatsapp.com/EsqChHUok02G5MT1UknOND?s=sw&p=a&mlu=4&ilr=4"
               target="_blank"
               rel="noopener noreferrer"
               className={`relative inline-flex items-center gap-3 px-10 py-5 rounded-full font-bold text-xl border-2 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 group/btn
